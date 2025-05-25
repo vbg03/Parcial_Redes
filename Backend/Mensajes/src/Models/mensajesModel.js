@@ -23,7 +23,12 @@ async function obtenerMensajesPorUsuario(id_usuario) {
     return rows;
 }
 
+async function eliminarMensaje(id) {
+    await conexion.query('DELETE FROM mensajes WHERE id = ?', [id]);
+}
+
 module.exports = {
     crearMensaje,
-    obtenerMensajesPorUsuario
+    obtenerMensajesPorUsuario,
+    eliminarMensaje
 };

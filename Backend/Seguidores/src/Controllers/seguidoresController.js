@@ -46,4 +46,10 @@ router.post('/seguidores', async (req, res) => {
     }
 });
 
+router.delete('/seguidores/eliminar', async (req, res) => {
+    const { usuarioS, usuarioP } = req.body;
+    await seguidoresModel.eliminarSeguimiento(usuarioS, usuarioP);
+    res.send("Seguimiento eliminado");
+});
+
 module.exports = router;

@@ -49,6 +49,7 @@ router.post('/auth/login', async (req, res) => {
         usuario: {
             id: user.id,
             nombre_completo: user.nombre_completo,
+            usuario: user.usuario, 
             rol: user.rol
         }
     });

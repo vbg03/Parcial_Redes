@@ -22,7 +22,13 @@ async function obtenerSeguidos(usuarioS) {
     return rows;
 }
 
+async function eliminarSeguimiento(usuarioS, usuarioP) {
+    await conexion.query('DELETE FROM seguidores WHERE usuarioS = ? AND usuarioP = ?', [usuarioS, usuarioP]);
+}
+
+
 module.exports = {
     crearRelacion,
-    obtenerSeguidos
+    obtenerSeguidos,
+    eliminarSeguimiento
 };

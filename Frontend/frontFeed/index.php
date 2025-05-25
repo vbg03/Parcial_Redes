@@ -110,7 +110,7 @@
     <!-- Mensajes propios -->
     <h4>📝 Tus mensajes</h4>
     <?php
-    $misMensajesURL = "http://localhost:3002/mensajes/usuario/$usuarioId";
+    $misMensajesURL = "http://192.168.100.2:3002/mensajes/usuario/$usuarioId";
     $chPropios = curl_init($misMensajesURL);
     curl_setopt($chPropios, CURLOPT_RETURNTRANSFER, true);
     $respPropios = curl_exec($chPropios);
@@ -150,13 +150,13 @@
         </thead>
         <tbody>
         <?php
-        $ch = curl_init("http://localhost:3001/usuarios");
+        $ch = curl_init("http://192.168.100.2:3001/usuarios");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $resp = curl_exec($ch);
         curl_close($ch);
         $usuariosLista = json_decode($resp);
 
-        $ch = curl_init("http://localhost:3003/seguidores/$usuarioId");
+        $ch = curl_init("http://192.168.100.2:3003/seguidores/$usuarioId");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $respSeg = curl_exec($ch);
         curl_close($ch);
@@ -191,7 +191,7 @@
 
     <!-- Mensajes de seguidos -->
     <?php
-    $seguidoresURL = "http://localhost:3003/seguidores/$usuarioId";
+    $seguidoresURL = "http://192.168.100.2:3003/seguidores/$usuarioId";
     $curl1 = curl_init($seguidoresURL);
     curl_setopt($curl1, CURLOPT_RETURNTRANSFER, true);
     $response1 = curl_exec($curl1);
@@ -204,7 +204,7 @@
         foreach ($seguidos as $s) {
             $usuarioP = $s->usuarioP;
 
-            $userURL = "http://localhost:3001/usuarios/$usuarioP";
+            $userURL = "http://192.168.100.2:3001/usuarios/$usuarioP";
             $chU = curl_init($userURL);
             curl_setopt($chU, CURLOPT_RETURNTRANSFER, true);
             $userResp = curl_exec($chU);
@@ -212,7 +212,7 @@
             $userInfo = json_decode($userResp);
             $nombreCompleto = $userInfo->nombre_completo ?? "Usuario $usuarioP";
 
-            $msgURL = "http://localhost:3002/mensajes/usuario/$usuarioP";
+            $msgURL = "http://192.168.100.2:3002/mensajes/usuario/$usuarioP";
             $chM = curl_init($msgURL);
             curl_setopt($chM, CURLOPT_RETURNTRANSFER, true);
             $msgResp = curl_exec($chM);

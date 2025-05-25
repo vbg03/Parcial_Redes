@@ -17,7 +17,7 @@
     <?php
     if (isset($_GET['id_usuario'])) {
         $id_usuario = $_GET['id_usuario'];
-        $url = "http://localhost:3002/mensajes/usuario/$id_usuario";
+        $url = "http://192.168.100.2:3002/mensajes/usuario/$id_usuario";
 
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

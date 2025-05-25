@@ -17,7 +17,7 @@
     <?php
     if (isset($_GET['usuarioS'])) {
         $usuarioS = $_GET['usuarioS'];
-        $url = "http://localhost:3003/seguidores/$usuarioS";
+        $url = "http://192.168.100.2:3003/seguidores/$usuarioS";
 
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

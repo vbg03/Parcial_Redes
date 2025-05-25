@@ -2,7 +2,7 @@
 $usuarioS = $_POST['usuarioS'];
 $usuarioP = $_POST['usuarioP'];
 
-$url = "http://localhost:3003/seguidores/eliminar";
+$url = "http://192.168.100.2:3003/seguidores/eliminar";
 $data = json_encode([
     'usuarioS' => $usuarioS,
     'usuarioP' => $usuarioP

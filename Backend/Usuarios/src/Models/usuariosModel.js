@@ -26,9 +26,14 @@ async function crearUsuario(nombre_completo, usuario, password, rol) {
     await conexion.query('INSERT INTO usuarios VALUES (null, ?, ?, ?, ?)', [nombre_completo, usuario, password, rol]);
 }
 
+async function eliminarUsuario(id) {
+    await conexion.query('DELETE FROM usuarios WHERE id = ?', [id]);
+}
+
 module.exports = {
     traerUsuarios,
     traerUsuario,
     validarUsuario,
-    crearUsuario
+    crearUsuario,
+    eliminarUsuario
 };

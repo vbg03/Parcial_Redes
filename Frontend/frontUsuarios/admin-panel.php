@@ -23,8 +23,62 @@ $usuarios = json_decode($response);
     <meta charset="UTF-8">
     <title>Panel de Administración</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 900px;
+        }
+
+        h2, h4 {
+            font-weight: bold;
+            color: #262626;
+        }
+
+        .table {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+        }
+
+        .btn {
+            border-radius: 10px;
+        }
+
+        .btn-danger, .btn-outline-danger {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            font-weight: 500;
+        }
+
+        .text-muted {
+            font-size: 14px;
+        }
+    </style>
 </head>
-<body class="container py-4">
+<body>
+
+<div class="admin-container">
     <h2>🛠 Panel de Administración</h2>
     <p>Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario']) ?></strong></p>
 
@@ -36,6 +90,7 @@ $usuarios = json_decode($response);
                 <th>Nombre</th>
                 <th>Usuario</th>
                 <th>Rol</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -45,13 +100,43 @@ $usuarios = json_decode($response);
                     <td><?= htmlspecialchars($u->nombre_completo) ?></td>
                     <td><?= htmlspecialchars($u->usuario) ?></td>
                     <td><?= htmlspecialchars($u->rol) ?></td>
+                    <td>
+                        <?php if ($u->usuario !== $_SESSION['usuario']): ?>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar<?= $u->id ?>">
+                                🗑 Eliminar
+                            </button>
+
+                            <!-- Modal de confirmación -->
+                            <div class="modal fade" id="modalEliminar<?= $u->id ?>" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <form method="post" action="eliminarUsuario.php" class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Confirmar eliminación</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>¿Estás seguro que deseas eliminar al usuario <strong>@<?= htmlspecialchars($u->usuario) ?></strong>?</p>
+                                            <input type="hidden" name="id" value="<?= $u->id ?>">
+                                            <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <span class="text-muted">No puedes eliminarte</span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-    <!-- Botón para abrir el modal -->
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearModal">➕ Crear nuevo usuario</button>
+    <!-- Botón para abrir el modal de crear usuario -->
+    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearModal">➕ Crear nuevo usuario</button>
 
     <!-- Modal de creación -->
     <div class="modal fade" id="crearModal" tabindex="-1">
@@ -80,7 +165,8 @@ $usuarios = json_decode($response);
     </div>
 
     <a class="btn btn-outline-danger mt-4" href="logout.php">Cerrar sesión</a>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

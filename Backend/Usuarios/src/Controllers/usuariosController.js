@@ -91,4 +91,11 @@ router.post('/usuarios', verificarToken, verificarAdmin, async (req, res) => {
     res.send("Usuario creado correctamente");
 });
 
+// DELETE: Eliminar usuario por ID (solo admin)
+router.delete('/usuarios/:id', verificarToken, verificarAdmin, async (req, res) => {
+    const id = req.params.id;
+    await usuariosModel.eliminarUsuario(id);
+    res.send("Usuario eliminado");
+});
+
 module.exports = router;

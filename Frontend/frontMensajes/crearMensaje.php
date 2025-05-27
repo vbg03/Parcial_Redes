@@ -7,7 +7,7 @@ $data = [
     'contenido' => $contenido
 ];
 
-$ch = curl_init('http://192.168.100.2:3002/mensajes');
+$ch = curl_init('http://localhost:3002/mensajes');
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);

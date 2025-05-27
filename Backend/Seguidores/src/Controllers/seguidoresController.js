@@ -18,8 +18,8 @@ router.post('/seguidores', async (req, res) => {
     }
 
     try {
-        const userP = await axios.get(`http://192.168.100.2:3001/usuarios/${usuarioP}`);
-        const userS = await axios.get(`http://192.168.100.2:3001/usuarios/${usuarioS}`);
+        const userP = await axios.get(`http://localhost:3001/usuarios/${usuarioP}`);
+        const userS = await axios.get(`http://localhost:3001/usuarios/${usuarioS}`);
 
         if (!userP.data || !userS.data) {
             return res.status(404).send("Uno o ambos usuarios no existen");

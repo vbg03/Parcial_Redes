@@ -4,7 +4,7 @@ session_start();
 $id = $_POST['id'];
 $token = $_POST['token'];
 
-$ch = curl_init("http://192.168.100.2:3001/usuarios/$id");
+$ch = curl_init("http://localhost:3001/usuarios/$id");
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer $token"

@@ -15,7 +15,7 @@ router.post('/mensajes', async (req, res) => {
     const { id_usuario, contenido } = req.body;
 
     try {
-        const respuesta = await axios.get(`http://192.168.100.2:3001/usuarios/${id_usuario}`);
+        const respuesta = await axios.get(`http://localhost:3001/usuarios/${id_usuario}`);
         if (!respuesta.data || respuesta.status !== 200) {
             return res.status(400).send("Usuario no válido");
         }

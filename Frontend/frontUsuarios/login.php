@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'password' => $_POST['password']
     ];
 
-    $ch = curl_init('http://192.168.100.2:3001/auth/login');
+    $ch = curl_init('http://localhost:3001/auth/login');
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
     curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);

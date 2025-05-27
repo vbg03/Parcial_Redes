@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin' || !isset($_SES
 }
 
 // Obtener lista de usuarios desde el microservicio
-$url = "http://192.168.100.2:3001/usuarios";
+$url = "http://localhost:3001/usuarios";
 $curl = curl_init($url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($curl);

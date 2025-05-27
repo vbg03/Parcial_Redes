@@ -13,7 +13,7 @@ $data = array(
     'rol' => $_POST["rol"]
 );
 
-$url = 'http://192.168.100.2:3001/usuarios';
+$url = 'http://localhost:3001/usuarios';
 $token = $_SESSION['token'];
 
 $ch = curl_init($url);
